@@ -1,0 +1,8 @@
+"""
+    To keep Declarative Base
+    and all other models which needs to be added in DB 
+"""
+
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
