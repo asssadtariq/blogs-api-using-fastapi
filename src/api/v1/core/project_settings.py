@@ -15,6 +15,11 @@ load_dotenv()
 class Settings(BaseSettings):
     """Class to represent project settings"""
 
+    ## Project / App details
+    PROJECT_NAME: str = "Tech Blogs"
+    HOST: str = "0.0.0.0"
+    PORT: int = 8008
+
     ## Database details
     DB_HOST: str = os.environ.get("DB_HOST")
     DB_NAME: str = os.environ.get("DB_NAME")
