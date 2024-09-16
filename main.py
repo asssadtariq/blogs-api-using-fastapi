@@ -1,6 +1,7 @@
 """This file creates fastapi app and execute it using uvicorn"""
 
 import uvicorn
+import load_env
 from src import app_settings
 from src.app import create_app
 
