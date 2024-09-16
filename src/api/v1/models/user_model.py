@@ -3,7 +3,7 @@
     its attributes, constraints, and relationships
 """
 
-from sqlalchemy import UUID, Column, VARCHAR, DATETIME, Text, BOOLEAN, TIMESTAMP, func
+from sqlalchemy import UUID, Column, VARCHAR, DATE, Text, BOOLEAN, TIMESTAMP, func
 
 # from sqlalchemy.orm import relaltionship
 
@@ -24,7 +24,7 @@ class User(Base):
     first_name = Column(VARCHAR(64), nullable=False)
     last_name = Column(VARCHAR(64), nullable=False)
     password = Column(VARCHAR(32))
-    dob = Column(DATETIME, nullable=False)
+    dob = Column(DATE, nullable=False)
     ver_key = Column(Text)
     is_verified = Column(BOOLEAN, default=False)
     is_active = Column(VARCHAR(32), default=True)
