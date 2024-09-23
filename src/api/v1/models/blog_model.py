@@ -32,3 +32,4 @@ class Blog(Base):
     is_active = Column(BOOLEAN, default=True)
 
     blog_catg_id = Column(UUID(as_uuid=True), ForeignKey("blog_category.blog_catg_id"))
+    author_id = Column(UUID(as_uuid=True), ForeignKey("user.user_id"))

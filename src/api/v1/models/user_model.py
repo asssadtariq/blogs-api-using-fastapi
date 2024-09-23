@@ -5,7 +5,7 @@
 
 from sqlalchemy import UUID, Column, VARCHAR, DATE, Text, BOOLEAN, TIMESTAMP, func
 
-# from sqlalchemy.orm import relaltionship
+from sqlalchemy.orm import relationship
 
 from . import Base
 
@@ -31,3 +31,5 @@ class User(Base):
     created_on = Column(TIMESTAMP, server_default=func.now())
     last_modified = Column(TIMESTAMP, server_default=func.now())
     profile_img_path = Column(Text, nullable=True)
+
+    user_blog = relationship("Blog", backref="user_blog")
