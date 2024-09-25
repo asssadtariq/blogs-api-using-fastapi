@@ -1,6 +1,7 @@
 """ This file creates FAST API app and register items like Middleware, Routes etc"""
 
 from fastapi import FastAPI
+from src.routes import register_routes
 
 
 def create_app() -> FastAPI:
@@ -12,5 +13,6 @@ def create_app() -> FastAPI:
     ## register middleware
 
     ## register routes
+    register_routes(app)
 
     return app
