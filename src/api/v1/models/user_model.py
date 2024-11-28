@@ -3,6 +3,7 @@
     its attributes, constraints, and relationships
 """
 
+import uuid
 from sqlalchemy import UUID, Column, VARCHAR, DATE, Text, BOOLEAN, TIMESTAMP, func
 
 from sqlalchemy.orm import relationship
@@ -18,7 +19,9 @@ class User(Base):
 
     __tablename__ = "user"
 
-    user_id = Column(UUID(as_uuid=True), primary_key=True, index=True)
+    user_id = Column(
+        UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4
+    )
     username = Column(VARCHAR(64), unique=True, nullable=False)
     email = Column(VARCHAR(64), unique=True, nullable=False)
     first_name = Column(VARCHAR(64), nullable=False)
