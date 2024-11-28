@@ -32,6 +32,11 @@ class Settings(BaseSettings):
         f"postgresql+psycopg2://{DB_USER}:{parse.quote_plus(DB_PASSWORD)}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     )
 
+    ## App Security
+    SECRET_KEY: str = "secretkey__--__2024"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_TIME: int = 30
+
 
 def settings():
     """To return settings object"""
