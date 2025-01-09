@@ -1,5 +1,5 @@
 """
-It keeps project's constants variables 
+It keeps project's constants variables
 variables imported from environment
 """
 
@@ -28,9 +28,7 @@ class Settings(BaseSettings):
     DB_PORT: str = os.environ.get("DB_PORT")
 
     ## create DB URL
-    DB_URL: str = (
-        f"postgresql+psycopg2://{DB_USER}:{parse.quote_plus(DB_PASSWORD)}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-    )
+    DB_URL: str = f"postgresql+psycopg2://{DB_USER}:{parse.quote_plus(DB_PASSWORD)}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
     ## App Security
     SECRET_KEY: str = "secretkey__--__2024"
