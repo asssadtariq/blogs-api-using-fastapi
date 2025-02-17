@@ -1,7 +1,11 @@
+from typing import List
 from sqlalchemy.orm import Session
 
 from src.api.v1.models.user_model import User
-from src.api.v1.validators.user_validators import InValidatorUserAdd
+from src.api.v1.validators.user_validators import (
+    InValidatorUserAdd,
+    InValidatorGetUsers,
+)
 
 
 class UserService:
@@ -32,3 +36,39 @@ class UserService:
         self.db.refresh(user_obj)
 
         return user_obj
+
+    def get_users(self, user_conditions: InValidatorGetUsers) -> List[User]:
+        users = self.db.query(User)
+
+        if user_conditions.user_id:
+            users = users.filter(User.user_id == user_conditions.user_id)
+
+        # if user_conditions.username:
+        #     users = users.filter(User.username == user_conditions.username)
+
+        if user_conditions.email:
+            users = users.filter(User.email == user_conditions.email)
+
+        if user_conditions.first_name:
+            users = users.filter(User.first_name == user_conditions.first_name)
+
+        if user_conditions.last_name:
+            users = users.filter(User.last_name == user_conditions.last_name)
+
+        if user_conditions.is_active is not None:
+            users = users.filter(User.is_active == user_conditions.is_active)
+
+        if user_conditions.page_size:
+            users = users.limit(limit=user_conditions.page_size)
+
+        if user_conditions.page_number:
+            users = users.offset(offset=user_conditions.page_number)
+
+        print(users)
+
+        users = users.all()
+
+        print(users)
+
+
+        return users
