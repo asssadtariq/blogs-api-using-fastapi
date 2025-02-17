@@ -22,3 +22,4 @@ def create_user(
     response = UserController(db=db).add_new_user(user_details=user_details)
 
     ## return response
+    return response
