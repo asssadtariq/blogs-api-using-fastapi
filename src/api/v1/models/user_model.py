@@ -30,7 +30,7 @@ class User(Base):
     dob = Column(DATE, nullable=False)
     ver_key = Column(Text)
     is_verified = Column(BOOLEAN, default=False)
-    is_active = Column(VARCHAR(32), default=True)
+    is_active = Column(BOOLEAN, default=True)
     created_on = Column(TIMESTAMP, server_default=func.now())
     last_modified = Column(TIMESTAMP, server_default=func.now())
     profile_img_path = Column(Text, nullable=True)
@@ -39,11 +39,11 @@ class User(Base):
 
     def to_dict(self) -> dict:
         return {
+            "user_id": self.user_id,
             "username": self.username,
             "email": self.email,
             "first_name": self.first_name,
             "last_name": self.last_name,
-            "password": self.password,
             "dob": self.dob,
             "ver_key": self.ver_key,
             "is_verified": self.is_verified,
