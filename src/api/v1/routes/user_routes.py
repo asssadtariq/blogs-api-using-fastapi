@@ -7,12 +7,12 @@ from sqlalchemy.orm import Session
 from src.api.v1.db.session import get_db
 from src.api.v1.core.security import validate_token
 from src.api.v1.controllers.user_controller import UserController
-from src.api.v1.validators.user_validators import InValidatorUserAdd
+from src.api.v1.validators.user_validators import InValidatorUserAdd, InValidatorGetUsers
 
 router = APIRouter(prefix="/user")
 
 
-@router.post("/create_user", summary="")
+@router.post("/create_user", summary="This route allows user to create a new user")
 def create_user(
     user_details: InValidatorUserAdd,
     db: Session = Depends(get_db),
@@ -20,6 +20,20 @@ def create_user(
     """To create a new user"""
     ## call the controller to add data
     response = UserController(db=db).add_new_user(user_details=user_details)
+
+    ## return response
+    return response
+
+
+@router.post("/get_users", summary="This routes returns list of user(s)")
+def get_users(
+    user_conditions: InValidatorGetUsers,
+    db: Session = Depends(get_db),
+    # current_user=Depends(validate_token),
+):
+    """To create a new user"""
+    ## call the controller to add data
+    response = UserController(db=db).get_users(user_conditions=user_conditions)
 
     ## return response
     return response
