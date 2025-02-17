@@ -8,7 +8,6 @@ from pydantic_settings import BaseSettings
 
 
 class InValidatorUserAdd(BaseSettings):
-    user_id: Optional[UUID] = Field(None)
     username: str
     email: str
     first_name: str
