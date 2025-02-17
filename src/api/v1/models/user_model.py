@@ -1,6 +1,6 @@
 """
-    This file has the User model
-    its attributes, constraints, and relationships
+This file has the User model
+its attributes, constraints, and relationships
 """
 
 import uuid
@@ -26,7 +26,7 @@ class User(Base):
     email = Column(VARCHAR(64), unique=True, nullable=False)
     first_name = Column(VARCHAR(64), nullable=False)
     last_name = Column(VARCHAR(64), nullable=False)
-    password = Column(VARCHAR(32))
+    password = Column(VARCHAR(64))
     dob = Column(DATE, nullable=False)
     ver_key = Column(Text)
     is_verified = Column(BOOLEAN, default=False)
@@ -36,3 +36,19 @@ class User(Base):
     profile_img_path = Column(Text, nullable=True)
 
     user_blog = relationship("Blog", backref="user_blog")
+
+    def to_dict(self) -> dict:
+        return {
+            "username": self.username,
+            "email": self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "password": self.password,
+            "dob": self.dob,
+            "ver_key": self.ver_key,
+            "is_verified": self.is_verified,
+            "is_active": self.is_active,
+            "created_on": self.created_on,
+            "last_modified": self.last_modified,
+            "profile_img_path": self.profile_img_path,
+        }
