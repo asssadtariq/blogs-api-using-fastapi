@@ -16,5 +16,16 @@ class UserController:
         verification_key = generate_random_string(text_length=10)
         password_hash = get_password_hash(user_details.password)
 
-        print(password_hash)
-        return True
+        # add values to existing user_details object
+        user_details.ver_key = verification_key
+        user_details.password = password_hash
+
+        # add to db
+        response = UserService(db=self.db).add_user(user_details=user_details)
+
+        # convert the object to dictionary
+        response = response.to_dict()
+        del response["password"]
+
+        # return the response
+        return response
