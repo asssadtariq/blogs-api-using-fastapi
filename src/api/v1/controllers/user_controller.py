@@ -1,10 +1,11 @@
+from typing import List
 from sqlalchemy.orm import Session
 
 from src.api.v1.models.user_model import User
+from src.api.v1.core.security import get_password_hash
 from src.api.v1.services.user_service import UserService
 from src.api.v1.helper.helpers import generate_random_string
-from src.api.v1.validators.user_validators import InValidatorUserAdd
-from src.api.v1.core.security import get_password_hash
+from src.api.v1.validators.user_validators import InValidatorUserAdd, InValidatorGetUsers
 
 
 class UserController:
@@ -25,7 +26,15 @@ class UserController:
 
         # convert the object to dictionary
         response = response.to_dict()
-        del response["password"]
+
+        # return the response
+        return response
+    
+    def get_users(self, user_conditions: InValidatorGetUsers) -> List[User]:
+        # get response from the service
+        response = UserService(db=self.db).get_users(user_conditions)
+
+        response = list(map(lambda user_obj: user_obj.to_dict(), response))
 
         # return the response
         return response
